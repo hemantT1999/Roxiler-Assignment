@@ -1,17 +1,18 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api"; // Update if needed
+const API_URL = import.meta.env.VITE_API_URL;
 
-// Get token from localStorage
-const getToken = () => localStorage.getItem("token");
-
-// Axios instance with default headers
 const axiosInstance = axios.create({
   baseURL: API_URL,
   headers: {
     "Content-Type": "application/json",
   },
+  timeout: 15000,
+  validateStatus: (status) => status >= 200 && status < 500,
 });
+
+// Get token from localStorage
+const getToken = () => localStorage.getItem("token");
 
 // Add token to headers dynamically
 axiosInstance.interceptors.request.use((config) => {
