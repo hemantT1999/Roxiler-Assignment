@@ -13,10 +13,6 @@ const app = express();
 
 // ✅ Middleware
 app.use(express.json());
-app.use(cors());
-app.use(helmet());
-app.use(morgan("dev"));
-
 app.use(
   cors({
     origin: [
@@ -29,6 +25,8 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+app.use(helmet());
+app.use(morgan("dev"));
 
 // Add before routes
 app.get("/", (req, res) => {
