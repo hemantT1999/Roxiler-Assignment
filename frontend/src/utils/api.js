@@ -11,10 +11,8 @@ const axiosInstance = axios.create({
   validateStatus: (status) => status >= 200 && status < 500,
 });
 
-// Get token from localStorage
 const getToken = () => localStorage.getItem("token");
 
-// Add token to headers dynamically
 axiosInstance.interceptors.request.use((config) => {
   const token = getToken();
   if (token) {

@@ -30,7 +30,7 @@ const ListUsers = () => {
     <div className="container mx-auto p-4">
       <h2 className="text-3xl font-bold mb-8 text-center text-zinc-100">
         List of Users
-      </h2>
+      </h2> q
       <div className="bg-zinc-800 p-6 rounded-xl shadow-lg border border-zinc-700 mb-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <input
