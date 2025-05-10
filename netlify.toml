@@ -1,4 +1,3 @@
 [build]
-  base = "frontend"               # Set the frontend folder as the base
   command = "npm run build"        # Build command
   publish = "frontend/build"       # Set correct publish directory
