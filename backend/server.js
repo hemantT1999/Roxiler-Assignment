@@ -30,11 +30,38 @@ app.use(
   })
 );
 
+// Add before routes
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to Store Rating API" });
+});
+
+// Add health check endpoint
+app.get("/health", (req, res) => {
+  res.json({ status: "ok", timestamp: new Date() });
+});
+
 // ✅ Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", authenticateUser, adminRoutes);
 app.use("/api/user", authenticateUser, userRoutes);
 app.use("/api/store-owner", authenticateUser, storeOwnerRoutes);
+
+// Add 404 handler
+app.use((req, res) => {
+  res.status(404).json({
+    error: "Not Found",
+    path: req.path,
+  });
+});
+
+// Add error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    error: "Internal Server Error",
+    message: process.env.NODE_ENV === "production" ? null : err.message,
+  });
+});
 
 // ✅ Start Server
 const PORT = process.env.PORT || 5000;
