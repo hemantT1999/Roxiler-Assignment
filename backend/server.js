@@ -17,6 +17,19 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 
+app.use(
+  cors({
+    origin: [
+      "https://roxiler-assignment-seven.vercel.app",
+      "http://localhost:5173",
+      "http://localhost:3000",
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 // ✅ Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", authenticateUser, adminRoutes);
